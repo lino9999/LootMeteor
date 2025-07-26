@@ -1,0 +1,21 @@
+name: LootMeteor
+version: '1.0'
+main: com.Lino.lootMeteor.LootMeteor
+api-version: '1.21'
+author: Lino
+description: Spawn meteors with loot chests
+
+commands:
+  lootmeteor:
+    description: Main LootMeteor command
+    aliases: [lm]
+    permission: lootmeteor.admin
+    usage: /<command> [edit|reload|spawn]
+
+permissions:
+  lootmeteor.admin:
+    description: Access to all LootMeteor commands
+    default: op
+  lootmeteor.bypass:
+    description: Bypass meteor chest protection
+    default: op
