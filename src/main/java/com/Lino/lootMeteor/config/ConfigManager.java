@@ -19,15 +19,20 @@ public class ConfigManager {
 
         config.addDefault("meteor.spawn-interval", 10);
         config.addDefault("meteor.world", "world");
-        config.addDefault("meteor.min-radius", 100);
-        config.addDefault("meteor.max-radius", 500);
         config.addDefault("meteor.height", 150);
-        config.addDefault("meteor.speed", 0.5);
+        config.addDefault("meteor.speed", 0.3);
         config.addDefault("meteor.explosion-power", 4.0);
         config.addDefault("meteor.crater-radius", 5);
         config.addDefault("meteor.regeneration-time", 10);
         config.addDefault("meteor.fire-spread", true);
         config.addDefault("meteor.obsidian-sphere-radius", 3);
+
+        config.addDefault("meteor.min-player-distance", 50);
+        config.addDefault("meteor.max-player-distance", 150);
+        config.addDefault("meteor.notification-radius", 200);
+
+        config.addDefault("meteor.min-radius", 100);
+        config.addDefault("meteor.max-radius", 500);
 
         config.options().copyDefaults(true);
         plugin.saveConfig();
@@ -39,14 +44,6 @@ public class ConfigManager {
 
     public String getWorld() {
         return config.getString("meteor.world");
-    }
-
-    public int getMinRadius() {
-        return config.getInt("meteor.min-radius");
-    }
-
-    public int getMaxRadius() {
-        return config.getInt("meteor.max-radius");
     }
 
     public int getHeight() {
@@ -75,5 +72,27 @@ public class ConfigManager {
 
     public int getObsidianSphereRadius() {
         return config.getInt("meteor.obsidian-sphere-radius");
+    }
+
+    public int getMinPlayerDistance() {
+        return config.getInt("meteor.min-player-distance");
+    }
+
+    public int getMaxPlayerDistance() {
+        return config.getInt("meteor.max-player-distance");
+    }
+
+    public int getNotificationRadius() {
+        return config.getInt("meteor.notification-radius");
+    }
+
+    @Deprecated
+    public int getMinRadius() {
+        return config.getInt("meteor.min-radius");
+    }
+
+    @Deprecated
+    public int getMaxRadius() {
+        return config.getInt("meteor.max-radius");
     }
 }

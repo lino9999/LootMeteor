@@ -39,7 +39,9 @@ public class LootManager {
 
         lootConfig = YamlConfiguration.loadConfiguration(lootFile);
 
+        // Create default items only if the file is empty
         if (!lootConfig.contains("loot")) {
+            // Use the old format for default items for backward compatibility
             lootConfig.set("loot.diamond.material", "DIAMOND");
             lootConfig.set("loot.diamond.amount", 3);
             lootConfig.set("loot.diamond.chance", 15.0);
@@ -70,30 +72,44 @@ public class LootManager {
         if (lootConfig.contains("loot")) {
             for (String key : lootConfig.getConfigurationSection("loot").getKeys(false)) {
                 String path = "loot." + key;
-                String materialName = lootConfig.getString(path + ".material");
-                int amount = lootConfig.getInt(path + ".amount", 1);
-                double chance = lootConfig.getDouble(path + ".chance", 10.0);
 
-                try {
-                    Material material = Material.valueOf(materialName);
-                    ItemStack item = new ItemStack(material, amount);
-                    lootItems.add(new LootItem(item, chance));
-                } catch (IllegalArgumentException e) {
-                    plugin.getLogger().warning("Invalid material: " + materialName);
+                // Check if it's the new format (serialized item)
+                if (lootConfig.contains(path + ".item")) {
+                    // New format with full item serialization
+                    ItemStack item = lootConfig.getItemStack(path + ".item");
+                    double chance = lootConfig.getDouble(path + ".chance", 10.0);
+
+                    if (item != null) {
+                        lootItems.add(new LootItem(item, chance));
+                    }
+                } else if (lootConfig.contains(path + ".material")) {
+                    // Old format for backward compatibility
+                    String materialName = lootConfig.getString(path + ".material");
+                    int amount = lootConfig.getInt(path + ".amount", 1);
+                    double chance = lootConfig.getDouble(path + ".chance", 10.0);
+
+                    try {
+                        Material material = Material.valueOf(materialName);
+                        ItemStack item = new ItemStack(material, amount);
+                        lootItems.add(new LootItem(item, chance));
+                    } catch (IllegalArgumentException e) {
+                        plugin.getLogger().warning("Invalid material: " + materialName);
+                    }
                 }
             }
         }
     }
 
     public void saveLootFromInventory(List<ItemStack> items) {
+        // Clear existing loot
         lootConfig.set("loot", null);
 
         int index = 0;
         for (ItemStack item : items) {
             if (item != null && item.getType() != Material.AIR) {
                 String key = "item_" + index;
-                lootConfig.set("loot." + key + ".material", item.getType().name());
-                lootConfig.set("loot." + key + ".amount", item.getAmount());
+                // Save the entire ItemStack with all its metadata
+                lootConfig.set("loot." + key + ".item", item);
                 lootConfig.set("loot." + key + ".chance", 20.0);
                 index++;
             }
@@ -112,6 +128,7 @@ public class LootManager {
             }
         }
 
+        // Ensure at least one item is generated
         if (generatedLoot.isEmpty() && !lootItems.isEmpty()) {
             LootItem randomItem = lootItems.get(random.nextInt(lootItems.size()));
             generatedLoot.add(randomItem.getItem().clone());

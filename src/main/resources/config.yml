@@ -1,35 +1,13 @@
-# LootMeteor Configuration
-
 meteor:
-  # Time in minutes between meteor spawns
   spawn-interval: 10
-
-  # World where meteors will spawn
   world: world
-
-  # Minimum distance from spawn point
-  min-radius: 100
-
-  # Maximum distance from spawn point
-  max-radius: 500
-
-  # Height where meteors spawn
   height: 150
-
-  # Fall speed multiplier
-  speed: 0.5
-
-  # Explosion power (visual only)
+  speed: 0.3
   explosion-power: 4.0
-
-  # Crater radius in blocks
   crater-radius: 5
-
-  # Time in minutes before regeneration
   regeneration-time: 10
-
-  # Enable fire spread in crater
   fire-spread: true
-
-  # Obsidian sphere radius
   obsidian-sphere-radius: 3
+  min-player-distance: 50
+  max-player-distance: 150
+  notification-radius: 200
