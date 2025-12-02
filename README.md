@@ -32,14 +32,4 @@ Random events keep players engaged. **LootMeteor** isn't just a loot drop; it's 
 
 ---
 
-## ⚙️ Configuration
-Control every aspect of the event in `config.yml`.
-
-```yaml
-meteor:
-  spawn-interval: 10      # Minutes between meteors
-  height: 150             # Y-level spawn height
-  speed: 0.3              # Fall speed
-  explosion-power: 4.0    # Impact size
-  regeneration-time: 10   # Minutes before terrain restores
-  fire-spread: true       # Set fire on impact?
+<div align="center"> <p>Made with ❤️ by Lino</p> <p><b>Watch the skies!</b></p> </div>
