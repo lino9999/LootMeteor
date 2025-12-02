@@ -1,56 +1,45 @@
-# LootMeteor Plugin for Spigot 1.21.4
+# ☄️ LootMeteor - Dynamic Meteor Events (1.21+)
 
-A dynamic meteor spawning plugin that creates exciting loot events for your Minecraft server.
+> **Spice up your survival experience with falling treasures from the sky.**
+> LootMeteor spawns spectacular meteors that crash into the world, creating craters and delivering custom loot chests.
+> **Features automatic terrain regeneration to keep your map clean!**
 
-## Features
+![Java](https://img.shields.io/badge/Java-21-orange) ![Spigot](https://img.shields.io/badge/API-1.21-yellow) ![License](https://img.shields.io/badge/License-MIT-blue)
 
-- **Automatic Meteor Spawns**: Meteors spawn at configurable intervals
-- **Custom Loot System**: Configure loot with a user-friendly GUI
-- **Visual Effects**: Beautiful meteor fall animation with particles and sounds
-- **Crater Generation**: Creates realistic impact craters with obsidian spheres
-- **Automatic Regeneration**: Terrain regenerates after a configurable time
-- **Player Notifications**: Nearest player receives coordinates of meteor impact
-- **Update Checker**: Automatic checking for plugin updates via SpigotMC API
-- **Full Customization**: All messages and settings are configurable
+---
 
-## Installation
+## 🌌 Why LootMeteor?
+Random events keep players engaged. **LootMeteor** isn't just a loot drop; it's a visual spectacle. Watch fireballs descend from the sky with particle trails, explode upon impact, and fight for the loot inside the obsidian crater. Best of all? The crater heals itself automatically.
 
-1. Download the LootMeteor.jar file
-2. Place it in your server's `plugins` folder
-3. Restart your server
-4. Configure the plugin in `plugins/LootMeteor/config.yml`
+### ✨ Key Features
 
-## Commands
+* **🔥 Epic Visuals & Physics**
+    * Meteors fall with **Flame, Lava, and Smoke** particle trails.
+    * Realistic explosion sounds and impact effects upon landing.
+    * Creates a temporary crater surrounded by fire and obsidian.
 
-- `/lootmeteor edit` or `/lm edit` - Open the loot editor GUI
-- `/lootmeteor reload` or `/lm reload` - Reload configuration files
-- `/lootmeteor spawn` or `/lm spawn` - Force spawn a meteor
+* **♻️ Smart Terrain Regeneration**
+    * Don't worry about map damage! The plugin takes a snapshot of the terrain before impact.
+    * Craters automatically regenerate after a configurable time (default: 10 mins).
 
-## Permissions
+* **💎 Custom Loot GUI**
+    * Manage loot tables easily in-game.
+    * Run `/lm edit` to drag-and-drop items into the loot pool with configurable drop chances.
 
-- `lootmeteor.admin` - Access to all LootMeteor commands (default: op)
-- `lootmeteor.bypass` - Bypass meteor chest protection (default: op)
+* **⚙️ Highly Configurable**
+    * Customize spawn intervals, fall speed, explosion power, and detection radius.
+    * "Protected Chests" option prevents players from breaking the loot container instantly.
 
-## Configuration Files
+---
 
-### config.yml
+## ⚙️ Configuration
+Control every aspect of the event in `config.yml`.
+
 ```yaml
 meteor:
-  spawn-interval: 10        # Minutes between spawns
-  world: world             # World name
-  min-radius: 100          # Min distance from spawn
-  max-radius: 500          # Max distance from spawn
-  height: 150              # Spawn height
-  speed: 0.5               # Fall speed
-  explosion-power: 4.0     # Visual explosion size
-  crater-radius: 5         # Crater size
-  regeneration-time: 10    # Minutes before regeneration
-  fire-spread: true        # Enable fire in crater
-  obsidian-sphere-radius: 3 # Obsidian sphere size
-```
-
-### loot.yml
-Automatically generated with default items. Can be edited via GUI or manually.
-
-### messages.yml
-All plugin messages can be customized here.
+  spawn-interval: 10      # Minutes between meteors
+  height: 150             # Y-level spawn height
+  speed: 0.3              # Fall speed
+  explosion-power: 4.0    # Impact size
+  regeneration-time: 10   # Minutes before terrain restores
+  fire-spread: true       # Set fire on impact?
